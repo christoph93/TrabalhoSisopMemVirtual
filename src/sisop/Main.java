@@ -33,6 +33,9 @@ public class Main {
                     Integer.parseInt(params[2]),
                     Integer.parseInt(params[3]));
             
+            System.out.println(t.toString());
+            t.imprimeTrabela(t.calculaTabela());
+            
             line = br.readLine();            
         }
         
