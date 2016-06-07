@@ -47,10 +47,7 @@ public class Tabela {
             t[i][0] = "[" + i + "]";
             if(aux.contains(i)){
                 t[i][1] = "v";
-                t[i][2] = "0x" + String.format("%08X", rand.nextInt(numPags));
-                        
-                        
-                        //String.format("%x", Integer.toHexString(rand.nextInt(numPags)));
+                t[i][2] = "0x" + String.format("%08X", rand.nextInt(numPags));                        
             } else {
                 t[i][1] = "i";
                 t[i][2] = "0x00000000";
