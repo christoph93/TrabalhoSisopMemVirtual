@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sisop;
 
 import java.util.ArrayList;
@@ -24,6 +19,7 @@ public class Tabela {
         this.PS = PS;
         this.PTE = PTE;
         this.NUM = NUM;
+        //calcula o número de bits necessários
         VAbits = (int) (Math.log(VA * 1024) / Math.log(2));
         PSbits = (int) (Math.log(PS * 1024) / Math.log(2));
         tabela = calculaTabela();
@@ -43,9 +39,6 @@ public class Tabela {
         int prct = (int) (numPags / 4);
 
         ArrayList<Integer> aux = new ArrayList<>();
-
-        System.out.println("VAbits " + VAbits);
-        System.out.println("PSbits " + PSbits);
 
         for (int i = 0; i < prct; i++) {
             int a = rand.nextInt(numPags);
@@ -102,7 +95,7 @@ public class Tabela {
 
     @Override
     public String toString() {
-        return "Tabela{" + "VA=" + VA + ", PS=" + PS + ", PTE=" + PTE + ", NUM=" + NUM + '}';
+        return "Tabela " + "VA:" + VA + ", PS:" + PS + ", PTE:" + PTE + ", NUM:" + NUM ;
     }
 
     public int getVA() {
