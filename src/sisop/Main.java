@@ -24,7 +24,7 @@ public class Main {
         
         String line = br.readLine();
         
-        String[] params = new  String[4];        
+        String[] params;
         Tabela t;
         while(line != null){            
             params = line.split(" ");
