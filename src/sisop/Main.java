@@ -34,7 +34,7 @@ public class Main {
                     Integer.parseInt(params[3]));
             
             System.out.println("\n" + t.toString());
-            t.imprimeTrabela(t.calculaTabela());
+            t.init();
             
             line = br.readLine();            
         }
