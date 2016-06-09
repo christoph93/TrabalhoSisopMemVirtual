@@ -69,14 +69,15 @@ public class Tabela {
         for (int i = 0; i < NUM; i++) {
             enderecos[i] = rand.nextInt((int) Math.pow(2, VAbits) - 1);
         }
-
+        System.out.println("VAbits " + VAbits);
+        System.out.println(Math.pow(2, VAbits) - 1);
         //valida
         for (int i : enderecos) {
             int VAshifted = i >> PSbits;
             if (tabela[VAshifted][1].equals("f")) {
                 System.out.println("VA 0x" + String.format("%08X", i) + " --> Inválido [VPN " + VAshifted + "]");
-            } else {
-                int aux = Integer.parseInt(tabela[VAshifted][2]) << PSbits;
+            } else {                
+                int aux = Integer.parseInt(tabela[VAshifted][2],16) << PSbits;
                 int off = i << VAbits - PSbits;
                 int temp = off & ((int) Math.pow(2, VAbits) - 1);
                 temp = temp >> VAbits - PSbits;

@@ -19,6 +19,7 @@ public class Main {
     
     public static void main(String[] args) throws FileNotFoundException, IOException {
         
+              
         FileReader fr = new FileReader("config.txt");
         BufferedReader br = new BufferedReader(fr);
         
