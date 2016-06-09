@@ -91,6 +91,8 @@ public class Tabela {
         for (int i = 0; i < tab.length; i++) {
             System.out.println(tab[i][0] + " " + tab[i][1] + " 0x" + tab[i][2]);
         }
+        System.out.println("Tamanho da tabela: " + (VA / PS ) * PTE + " bytes");
+        
     }
 
     @Override
