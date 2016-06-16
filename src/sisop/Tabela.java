@@ -1,5 +1,7 @@
 package sisop;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,8 +14,9 @@ public class Tabela {
     private int VA, PS, PTE, NUM, VAbits, PSbits;
     private String[][] tabela;
     Random rand;
+    FileWriter fw;
 
-    public Tabela(int VA, int PS, int PTE, int NUM) {
+    public Tabela(int VA, int PS, int PTE, int NUM, FileWriter fw) {
         rand = new Random();
         this.VA = VA;
         this.PS = PS;
@@ -23,10 +26,10 @@ public class Tabela {
         VAbits = (int) (Math.log(VA * 1024) / Math.log(2));
         PSbits = (int) (Math.log(PS * 1024) / Math.log(2));
         tabela = calculaTabela();
-
+        this.fw = fw;
     }
 
-    public void init() {
+    public void init() throws IOException {
         imprimeTrabela(tabela);
         comparaEnderecos();
     }
@@ -63,36 +66,38 @@ public class Tabela {
         return t;
     }
 
-    private void comparaEnderecos() {
+    private void comparaEnderecos() throws IOException {
         //gera
+        fw.write("\n\nEndereços gerados: ");
         int[] enderecos = new int[NUM];
         for (int i = 0; i < NUM; i++) {
             enderecos[i] = rand.nextInt((int) Math.pow(2, VAbits) - 1);
         }
-        System.out.println("VAbits " + VAbits);
-        System.out.println(Math.pow(2, VAbits) - 1);
+        //System.out.println("VAbits " + VAbits);
+        //System.out.println(Math.pow(2, VAbits) - 1);
         //valida
         for (int i : enderecos) {
             int VAshifted = i >> PSbits;
             if (tabela[VAshifted][1].equals("f")) {
-                System.out.println("VA 0x" + String.format("%08X", i) + " --> Inválido [VPN " + VAshifted + "]");
+                fw.write("\nVA 0x" + String.format("%08X", i) + " --> Inválido [VPN " + VAshifted + "]");
             } else {                
                 int aux = Integer.parseInt(tabela[VAshifted][2],16) << PSbits;
                 int off = i << VAbits - PSbits;
                 int temp = off & ((int) Math.pow(2, VAbits) - 1);
                 temp = temp >> VAbits - PSbits;
 
-                System.out.println("VA 0x" + String.format("%08X", i) + " --> " + String.format("%08X", temp | aux) + "[VPN " + VAshifted + "]");
+                fw.write("\nVA 0x" + String.format("%08X", i) + " --> " + String.format("%08X", temp | aux) + "[VPN " + VAshifted + "]");
             }
 
         }
     }
 
-    public void imprimeTrabela(String[][] tab) {
+    public void imprimeTrabela(String[][] tab) throws IOException {
+        fw.write("\nTamanho: " + (VA / PS ) * PTE + " bytes\n");
         for (int i = 0; i < tab.length; i++) {
-            System.out.println(tab[i][0] + " " + tab[i][1] + " 0x" + tab[i][2]);
+            fw.write("\n" + tab[i][0] + " " + tab[i][1] + " 0x" + tab[i][2]);
         }
-        System.out.println("Tamanho da tabela: " + (VA / PS ) * PTE + " bytes");
+        
         
     }
 

@@ -8,6 +8,7 @@ package sisop;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -25,6 +26,9 @@ public class Main {
         
         String line = br.readLine();
         
+        FileWriter fw = new FileWriter("tabelas.txt");
+        
+        
         String[] params;
         Tabela t;
         while(line != null){            
@@ -32,13 +36,16 @@ public class Main {
             t = new Tabela(Integer.parseInt(params[0]),
                     Integer.parseInt(params[1]),
                     Integer.parseInt(params[2]),
-                    Integer.parseInt(params[3]));
+                    Integer.parseInt(params[3]),
+                    fw);
             
-            System.out.println("\n" + t.toString());
+            fw.write(t.toString());
             t.init();
-            
+            fw.write("\n\n------------------------------------------------------\n\n");
             line = br.readLine();            
         }
+        
+        fw.close();
         
         
         
