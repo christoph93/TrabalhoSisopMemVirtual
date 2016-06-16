@@ -85,7 +85,7 @@ public class Tabela {
                 int off = i << VAbits - PSbits;
                 int temp = off & ((int) Math.pow(2, VAbits) - 1);
                 temp = temp >> VAbits - PSbits;
-
+                
                 fw.write("\nVA 0x" + String.format("%08X", i) + " --> " + String.format("%08X", temp | aux) + "[VPN " + VAshifted + "]");
             }
 
